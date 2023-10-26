@@ -21,7 +21,7 @@ class App {
         "[ERROR]: 문자를 입력하였습니다. 서로 다른 세 자리 숫자를 입력해 주세요."
       );
     }
-    if (!USER_INPUT.trim()) {
+    if (USER_INPUT.trim().length !== USER_INPUT.length) {
       throw new Error(
         "[ERROR]: 공백없이 입력해야 합니다. 서로 다른 세 자리를 입력해 주세요."
       );
