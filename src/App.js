@@ -9,7 +9,7 @@ class App {
     } while (reStart === "1");
   }
 
-  verifyInputFormat(input) {
+  validateInputFormat(input) {
     const USER_INPUT = input;
     if (USER_INPUT === "") {
       throw new Error(
@@ -26,7 +26,7 @@ class App {
         "[ERROR]: 공백없이 입력해야 합니다. 서로 다른 세 자리를 입력해 주세요."
       );
     }
-    if (USER_INPUT.length != 3) {
+    if (USER_INPUT.length !== 3) {
       throw new Error(
         "[ERROR]: 길이가 세 자리가 아닙니다. 서로 다른 세 자리 숫자를 입력해 주세요."
       );
@@ -79,7 +79,7 @@ class App {
       }
     }
 
-    Console.print(this.compareResult(ballCount, strikeCount));
+    return [ballCount, strikeCount];
   }
 
   generateRandomNumber() {
@@ -99,8 +99,9 @@ class App {
 
     do {
       userInput = await Console.readLineAsync("숫자를 입력해주세요 : ");
-      this.verifyInputFormat(userInput);
-      this.compareNumbers(randomNumber, userInput);
+      this.validateInputFormat(userInput);
+      const [BALL, STRIKE] = this.compareNumbers(randomNumber, userInput);
+      Console.print(this.compareResult(BALL, STRIKE));
     } while (randomNumber !== userInput);
 
     Console.print("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
@@ -108,11 +109,15 @@ class App {
     const RESTART = await Console.readLineAsync(
       "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.\n"
     );
-    if (RESTART !== "1" && RESTART != "2") {
+
+    if (RESTART !== "1" && RESTART !== "2") {
       throw new Error("[ERROR]: 1 혹은 2 를 입력해야 합니다.");
     }
     return RESTART;
   }
 }
+
+const app = new App();
+app.play();
 
 export default App;
