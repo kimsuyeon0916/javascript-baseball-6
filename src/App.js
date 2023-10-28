@@ -3,10 +3,11 @@ import { Console, Random } from "@woowacourse/mission-utils";
 class App {
   async play() {
     Console.print("숫자 야구 게임을 시작합니다.");
-    let reStart;
+    const RESTART='1'; // 따로 상수로 빼기
+    let choice;
     do {
-      reStart = await this.playGame();
-    } while (reStart === "1");
+      choice = await this.playGame();
+    } while (choice===RESTART);
   }
 
   validateInputFormat(input) {
@@ -16,7 +17,7 @@ class App {
         "[ERROR]: 아무것도 입력하지 않았습니다. 서로 다른 세 자리 숫자를 입력해 주세요."
       );
     }
-    if (isNaN(USER_INPUT)) {
+    if (Number.isNaN(USER_INPUT)) {
       throw new Error(
         "[ERROR]: 문자를 입력하였습니다. 서로 다른 세 자리 숫자를 입력해 주세요."
       );
