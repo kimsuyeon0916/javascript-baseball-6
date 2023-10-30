@@ -17,7 +17,7 @@ class App {
         "[ERROR]: 아무것도 입력하지 않았습니다. 서로 다른 세 자리 숫자를 입력해 주세요."
       );
     }
-    if (Number.isNaN(USER_INPUT)) {
+    if (!Number.isNaN(USER_INPUT)) {
       throw new Error(
         "[ERROR]: 문자를 입력하였습니다. 서로 다른 세 자리 숫자를 입력해 주세요."
       );
